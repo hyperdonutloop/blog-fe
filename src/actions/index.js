@@ -17,12 +17,8 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const registerRequest = userData => dispatch => {
   dispatch({ type: REGISTER_REQUEST, payload: userData });
   axios.post('https://blog-be.herokuapp.com/api/auth/register', userData)
-    .then(res => {
-      dispatch({ type: REGISTER_SUCCESS, payload: res.data })
-    })
-    .catch(error => {
-      dispatch({ type: REGISTER_FAILURE, payload: error })
-    })
+    .then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
+    .catch(error => dispatch({ type: REGISTER_FAILURE, payload: error }))
 }
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -46,11 +42,11 @@ export const LOAD_ALLPOSTS_REQUEST = 'LOAD_ALLPOSTS_REQUEST';
 export const LOAD_ALLPOSTS_SUCCESS = 'LOAD_ALLPOSTS_SUCCESS';
 export const LOAD_ALLPOSTS_FAILURE = 'LOAD_ALLPOSTS_FAILURE';
 
-export const loadAllPosts = () => {
+export const loadAllPosts = () => dispatch => {
   dispatch({ type: LOAD_ALLPOSTS_REQUEST })
   axiosWithAuth().get('/api/blog/')
     .then(res => dispatch({ type: LOAD_ALLPOSTS_SUCCESS, payload: res.data }))
-    .catch(error => dispatch({ type: LOAD_ALLPOSTS_FAILURE }))
+    .catch(error => dispatch({ type: LOAD_ALLPOSTS_FAILURE, payload: error }))
 }
 
 // load blog post by id
@@ -94,7 +90,7 @@ export const DELETE_BLOGPOST_REQUEST = 'DELETE_BLOGPOST_REQUEST';
 export const DELETE_BLOGPOST_SUCCESS = 'DELETE_BLOGPOST_SUCCESS';
 export const DELETE_BLOGPOST_FAILURE = 'DELETE_BLOGPOST_FAILURE';
 
-export const deletePost = id => {
+export const deletePost = id => dispatch => {
   dispatch({ type: DELETE_BLOGPOST_REQUEST, payload: id })
   axiosWithAuth().delete(`/api/blog/${id}`)
     .then(res => dispatch({ type: DELETE_BLOGPOST_SUCCESS, payload: res.data }))

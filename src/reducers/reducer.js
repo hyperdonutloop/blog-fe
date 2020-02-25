@@ -87,3 +87,5 @@ const reducer = (state=initialState, action) => {
       return {...state, isDeleting: false, error: action.payload}
   }
 }
+
+export default reducer;

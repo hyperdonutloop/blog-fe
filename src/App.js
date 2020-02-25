@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Route, Link, Router} from 'react-router-dom';
+import { connect } from 'react-redux';
+import PrivateRoute from './utils/privateRoute.js';
+import { setToken, logout } from './actions';
+
+import Login from './components/Login.js';
+
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = props => {
+  const { setToken } = props
+  useEffect(() => {
+    localStorage.getItem('token') ? setToken(true) : setToken(false)
+
+  }, [setToken])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="nav-bar">
+        <Link className="home-link"to="/home">Home</Link>
+        <Link className="logoutlogin" to="/" onClick={props.token ? props.logout : null}>
+          {props.token ? 'Log Out' : 'Log In'}
+        </Link>
+
+        <Route exact path="/" component={Login} />
+      </div>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  };
+}
+export default connect(mapStateToProps,{setToken, logout})(App);
