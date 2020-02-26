@@ -25,7 +25,7 @@ const App = props => {
       </div>
       
       <Route exact path='/' component={Login} />
-      <PrivateRoute path='/home' component={Home} />
+      {/* <PrivateRoute path='/home' component={Home} /> */}
       
     </div>
   );

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { loadAllPosts, loadPost } from '../actions';
 
 function Home (props) {
-  const id = Number(props.match.params.id)
+  // const id = Number(props.match.params.id)
   const { post, needUpdate, isLoading, loadAllPosts } = props;
 
   useEffect(() => {
     if ((post.length === 0 && !isLoading) || needUpdate) {
-      loadAllPosts(id)
+      loadAllPosts()
     }
-  }, [post, needUpdate, isLoading, loadAllPosts, id])
+  }, [post, needUpdate, isLoading, loadAllPosts])
   return (
     
     <div className="post-page">
@@ -21,7 +21,7 @@ function Home (props) {
 
 const mapStateToProps = state => {
   return {
-    post: state.allPosts,
+    post: state.post,
     isLoading: state.isLoading,
     needUpdate: state.needUpdate
   }
