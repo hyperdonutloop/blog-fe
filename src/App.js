@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import  { setToken, logout } from './actions';
 import PrivateRoute from './utils/privateRoute.js';
 import Login from './components/Login.js';
-import AllPosts from './components/AllPosts.js';
-
-import  { setToken, logout } from './actions';
+import Home from './components/Home.js';
 
 import './App.css';
-
 
 const App = props => {
   const { setToken } = props
@@ -24,10 +22,11 @@ const App = props => {
         <Link className="logoutlogin" to="/" onClick={props.token ? props.logout : null}>
           {props.token ? 'Log Out' : 'Log In'}
         </Link>
-
-        <Route exact path='/' component={Login} />
-        <PrivateRoute path='/blogs' component={AllPosts} />
       </div>
+      
+      <Route exact path='/' component={Login} />
+      <PrivateRoute path='/home' component={Home} />
+      
     </div>
   );
 }

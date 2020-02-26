@@ -33,6 +33,7 @@ const initialState = {
   isEditing: false,
   isDeleting: false,
   currentPost: null,
+  needUpdate: false,
   posts: [],
   users: []
 
@@ -58,13 +59,13 @@ const reducer = (state=initialState, action) => {
       localStorage.removeItem('token')
       return {...state, token: false, username: null}//may need to edit this
     case LOAD_BLOGPOST_REQUEST:
-      return {...state, isLoading: true, error: null}
+      return {...state, needUpdate: false, isLoading: true, error: null}
     case LOAD_BLOGPOST_SUCCESS:
       return {...state, isLoading: false, error: null, currentPost: action.payload}
     case LOAD_BLOGPOST_FAILURE:
       return {...state, isLoading: false, error: action.payload}
     case LOAD_ALLPOSTS_REQUEST:
-      return {...state, isLoading: true, error: null}
+      return {...state, needUpdate: false, isLoading: true, error: null}
     case LOAD_ALLPOSTS_SUCCESS:
       return {...state, isLoading: false, posts: action.payload}
     case LOAD_ALLPOSTS_FAILURE:
@@ -84,7 +85,7 @@ const reducer = (state=initialState, action) => {
     case DELETE_BLOGPOST_REQUEST: 
       return {...state, isDeleting: true, error: null}
     case DELETE_BLOGPOST_SUCCESS:
-      return {...state, isDeleting: false, error: null}
+      return {...state, needUpdate: false, isDeleting: false, error: null}
     case DELETE_BLOGPOST_FAILURE:
       return {...state, isDeleting: false, error: action.payload}
   }

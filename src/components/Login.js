@@ -43,7 +43,7 @@ const Login = props => {
         <button disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</button>
         <button disabled={props.isAuthenticating} onClick={handleRegister}>Register</button>
       </div>
-      {props.token ? <Redirect to='/home' /> : null}
+      {props.token ? <Redirect from="/" exact to='/home'/> : null}
     </form>
   )
 

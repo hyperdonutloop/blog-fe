@@ -2,7 +2,7 @@ import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth.js';
 
 // token handlers
-export const SET_TOKEN = 'SET_TOKEN'
+export const SET_TOKEN = 'SET_TOKEN';
 
 export const setToken = value => ({
   type: SET_TOKEN,
