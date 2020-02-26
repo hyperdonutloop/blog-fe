@@ -21,7 +21,7 @@ const Login = props => {
   }
 
   return (
-    <div className="login-form">
+    <form className="login-form">
       <h2>This is a Login Page</h2>
 
       <input 
@@ -35,13 +35,14 @@ const Login = props => {
         type="password"
         placeholder="password here"
         onChange={handleForm}
+        autoComplete="on"
       />
       <div className="buttons">
         <button disabled={props.isAuthenticating} onClick={handleLogin}>Sign-In</button>
         <button disabled={props.isAuthenticating} onClick={handleRegister}>Register</button>
       </div>
-      {props.token? <Redirect to='/home' /> : null}
-    </div>
+      {props.token ? <Redirect to='/home' /> : null}
+    </form>
   )
 
 }

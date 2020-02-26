@@ -42,6 +42,8 @@ const reducer = (state=initialState, action) => {
   switch(action.type){
     case SET_TOKEN:
       return {...state, token: action.payload}
+    default:
+      return state;
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
       return {...state, isAuthenticating: true, error: null};
