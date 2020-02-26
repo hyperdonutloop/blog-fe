@@ -18,7 +18,7 @@ export const registerRequest = userData => dispatch => {
   dispatch({ type: REGISTER_REQUEST, payload: userData });
   axios.post('https://blog-be.herokuapp.com/api/auth/register', userData)
     .then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
-    .catch(error => dispatch({ type: REGISTER_FAILURE, payload: error }))
+    .catch(error => dispatch({ type: REGISTER_FAILURE, payload: error}))
 }
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -27,15 +27,13 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
 export const loginRequest = userData => dispatch => {
   dispatch({ type: LOGIN_REQUEST, payload: userData });
-    axios.post('https://blog-be.herokuapp.com/api/auth/login')
+    axios.post('https://blog-be.herokuapp.com/api/auth/login', userData)
       .then(res => dispatch({ type: LOGIN_SUCCESS, payload: res.data }))
       .catch(error => dispatch({ type: LOGIN_FAILURE, payload: error }))
 }
 
 export const LOGOUT = 'LOGOUT';
-export const logout = () => ({
-  type: LOGOUT
-});
+export const logout = () => ({ type: LOGOUT });
 
 // get blog posts
 export const LOAD_ALLPOSTS_REQUEST = 'LOAD_ALLPOSTS_REQUEST';

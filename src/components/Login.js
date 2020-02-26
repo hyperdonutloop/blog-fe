@@ -7,11 +7,13 @@ const Login = props => {
   const [ formData, setFormData ] = useState({ username: '', password: ''})
 
   const handleLogin = (e) => {
+    console.log('LOGGIN IN!');
     e.preventDefault();
     props.loginRequest(formData)
   }
 
   const handleRegister = (e) => {
+    console.log('REGISTERING');
     e.preventDefault();
     props.registerRequest(formData)
   }
