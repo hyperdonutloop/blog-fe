@@ -1,30 +1,37 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { loadAllPosts, loadPost } from '../actions';
+import { loadAllPosts } from '../actions';
+import Post from './Post.js';
+
 
 function Home (props) {
-  // const id = Number(props.match.params.id)
   const { post, needUpdate, isLoading, loadAllPosts } = props;
-
+  console.log('test', post);
+  
   useEffect(() => {
-    if ((post.length === 0 && !isLoading) || needUpdate) {
+    if((post.length === 0 && !isLoading) || needUpdate) {
       loadAllPosts()
-    }
-  }, [post, needUpdate, isLoading, loadAllPosts])
+    }}, [post, needUpdate, isLoading, loadAllPosts])
+
   return (
     
     <div className="post-page">
-      <h1>These are all your posts</h1>
+      <div className="post-list">
+        <h1>These are all your posts</h1>
+        {post.map((item,i)=><Post key={i} post={item}/>)}
+      </div>
     </div>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    post: state.post,
+    post: state.posts,
     isLoading: state.isLoading,
     needUpdate: state.needUpdate
   }
 }
 
 export default connect(mapStateToProps,{loadAllPosts})(Home);
+
+// line 29 - changed 'post' to 'posts' and retrieving all posts worked

@@ -43,14 +43,12 @@ const reducer = (state=initialState, action) => {
   switch(action.type){
     case SET_TOKEN:
       return {...state, token: action.payload}
-    default:
-      return state;
     case LOGIN_REQUEST:
     case REGISTER_REQUEST:
       return {...state, isAuthenticating: true, error: null};
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      localStorage.getItem('token', action.payload.token);
+      localStorage.setItem('token', action.payload.token);
       return {...state, token: true, isAuthenticating: false, error: null};
     case LOGIN_FAILURE:
     case REGISTER_FAILURE:
@@ -88,6 +86,8 @@ const reducer = (state=initialState, action) => {
       return {...state, needUpdate: false, isDeleting: false, error: null}
     case DELETE_BLOGPOST_FAILURE:
       return {...state, isDeleting: false, error: action.payload}
+    default:
+      return state;
   }
 }
 

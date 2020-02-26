@@ -3,10 +3,13 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import  { setToken, logout } from './actions';
 import PrivateRoute from './utils/privateRoute.js';
+
 import Login from './components/Login.js';
 import Home from './components/Home.js';
 
 import './App.css';
+import PostPage from './components/PostPage';
+import DisplayPost from './components/DisplayPost';
 
 const App = props => {
   const { setToken } = props
@@ -25,8 +28,10 @@ const App = props => {
       </div>
       
       <Route exact path='/' component={Login} />
-      {/* <PrivateRoute path='/home' component={Home} /> */}
-      
+      <PrivateRoute path='/home' component={Home} />
+      <PrivateRoute path='/posts/:id' component={PostPage} />
+      <PrivateRoute path='/allposts' component={DisplayPost} />
+  
     </div>
   );
 }
